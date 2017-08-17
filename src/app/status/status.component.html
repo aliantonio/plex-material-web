@@ -1,1 +1,20 @@
 <div class="logo-wrap"></div>
+
+<div class="status-wrap">
+    <h2 style="color: white;">
+        PLEX SERVER IS {{ isPoweredOn ? 'ON' : 'OFF' }} <i class="material-icons">{{ isPoweredOn ? 'check_circle' : 'error'}}</i>
+    </h2>
+    <p style="color: white;" *ngIf="isPoweredOn">
+        Refresh your page/app.<br>
+        If you cannot see the library, click here.
+    </p>
+    <button md-raised-button id="report" (click)="report(recaptcha)" *ngIf="isPoweredOn">
+        Report <i class="material-icons">{{ isPoweredOn ? 'report_problem' : 'power_settings_new' }}</i>
+    </button>
+    <button md-raised-button id="power-on" (click)="powerOn(recaptcha)" *ngIf="!isPoweredOn">
+        Turn on Plex <i class="material-icons">{{ isPoweredOn ? 'report_problem' : 'power_settings_new' }}</i>
+    </button>
+    <div class="recaptcha-wrap">
+        <re-captcha site_key="'6LenhxoTAAAAAARx6c_SC9QmvNKykwE46s3Ar67W'"></re-captcha>
+    </div>
+</div>

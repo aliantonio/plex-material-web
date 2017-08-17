@@ -3,3 +3,18 @@
     height: 200px;
     background: #1F1F1F url(/assets/images/plex.jpg) no-repeat center;
 }
+
+.status-wrap, .recaptcha-wrap {
+    width: 350px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+i {
+    vertical-align: text-top;
+}
+
+.recaptcha-wrap {
+    text-align: -webkit-center;
+    padding-top: 15px;
+}

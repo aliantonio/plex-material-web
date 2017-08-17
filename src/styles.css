@@ -5,3 +5,17 @@ body {
     margin: 0;
     background: #1F1F1F;
 }
+
+html {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-toolbar.mat-primary {
+    background: #1F1F1F !important;
+}
+
+button {
+    background: #FF9625 !important;
+    text-transform: uppercase;
+    color: #fff !important;
+}
