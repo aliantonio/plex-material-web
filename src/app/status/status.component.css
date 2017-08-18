@@ -5,13 +5,13 @@
 }
 
 .status-wrap, .recaptcha-wrap {
-    width: 350px;
+    width: 375px;
     margin: 0 auto;
     text-align: center;
 }
 
 i {
-    vertical-align: text-top;
+    vertical-align: top;
 }
 
 .recaptcha-wrap {

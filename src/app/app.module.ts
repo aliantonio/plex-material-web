@@ -5,19 +5,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import 'hammerjs';
 import { ReCaptchaModule } from 'angular2-recaptcha';
+import { JsonpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { StatusComponent } from './status/status.component';
 import { PingServerService } from "./ping-server.service";
-import { DialogService } from "./dialog.service";
 import { JoinAPIService } from "./join-api.service";
 
 import { RouterModule, Routes } from '@angular/router';
 
-import { MdToolbarModule, MdButtonModule, MdDialogModule } from '@angular/material';
 import { ActivityComponent } from './activity/activity.component';
-import { DialogComponent } from './dialog/dialog.component';
+
+import { MaterializeModule } from "angular2-materialize";
 
 const appRoutes: Routes = [
   {
@@ -40,8 +40,7 @@ const appRoutes: Routes = [
     AppComponent,
     NavComponent,
     StatusComponent,
-    ActivityComponent,
-    DialogComponent
+    ActivityComponent
   ],
   imports: [
     BrowserModule,
@@ -49,14 +48,13 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     HttpModule,
     HttpClientModule,
-    MdToolbarModule,
-    MdButtonModule,
     ReCaptchaModule,
-    MdDialogModule
+    JsonpModule,
+    MaterializeModule
   ],
-  exports: [DialogComponent],
-  providers: [PingServerService, DialogService, JoinAPIService],
-  entryComponents: [DialogComponent],
+  exports: [MaterializeModule],
+  providers: [PingServerService, JoinAPIService],
+  entryComponents: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

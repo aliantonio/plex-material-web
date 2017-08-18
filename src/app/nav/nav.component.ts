@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MdSidenavModule} from '@angular/material';
+import {MaterializeAction} from 'angular2-materialize';
 
 @Component({
   selector: 'app-nav',
@@ -11,6 +11,7 @@ export class NavComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }

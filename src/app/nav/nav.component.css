@@ -1,0 +1,7 @@
+.nav-wrapper, .side-nav {
+    background-color: #1F1F1F;
+}
+
+.side-nav li > a {
+    color: #fff;
+}
