@@ -1,18 +1,21 @@
-<!-- <div class="activity-wrap">
-  <md-list>
-    <h3 md-subheader>Currently Watching</h3>
-    <md-divider aria-orientation="horizontal" role="separator" class="mat-divider"></md-divider>
-    <md-list-item *ngFor="let current of currentResults">
-      <h4 md-line>{{ current._title }}</h4>
-      <p md-line> {{ current.User._title }} - {{ current.Player._device }} </p>
-    </md-list-item>
-    <h3 md-subheader>Previously Watched</h3>
-    <md-divider aria-orientation="horizontal" role="separator" class="mat-divider"></md-divider>
-    <md-list-item class="list-item" *ngFor="let previous of previousResults">
-      <md-icon md-list-icon>folder</md-icon>
-      <!--<img src="../assets/images/{{previous.USER_ID}}.jpg" class="thumbnail" />-
-      <h4 md-line>{{ previous.MEDIA_CONTENT }}</h4>
-      <p md-line> {{ previous.USER_ID }} - {{ previous.TIMESTAMP }} </p>
-    </md-list-item>
-  </md-list>
-</div> -->
+<ul class="collection with-header" id="list-activity">
+  <li class="collection-header"><h4>Currently Watching</h4></li>
+  <li class="collection-item avatar" *ngFor="let current of currentResults">
+    <img src="../assets/images/{{ current.User._title }}.jpg" class="circle">
+    <span class="title">{{ current._title }}</span>
+    <p>{{ current.User._title }} - {{ current.Player._device }}</p>
+  </li>
+  <li class="collection-header"><h4>Previously Watched</h4></li>
+  <a class="nav-link" routerLink="/" routerLinkActive="active">
+    <li class="collection-item avatar" *ngFor="let previous of previousResults | slice:0:lazy; let i=index" 
+      infiniteScroll 
+      [infiniteScrollDistance]="1" 
+      [infiniteScrollThrottle]="300" 
+      (scrolled)="onScroll()">
+        <img src="../assets/images/{{ previous.USER_ID }}.jpg" class="circle">
+        <span class="title">{{ previous.MEDIA_CONTENT }}</span>
+        <p>{{ previous.USER_ID }} - {{ previous.TIMESTAMP }}</p>
+        <span class="secondary-content"><i class="material-icons">arrow_forward</i></span>
+    </li>
+  </a>
+</ul>

@@ -1,0 +1,25 @@
+.requests-wrapper {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.row {
+    color: #fff !important;
+}
+
+i {
+    color: grey !important;
+}
+
+i.active, i.tiny {
+    color: #FF9625 !important;
+}
+
+#submit-request {
+    margin-left: 3rem;
+}
+
+i.tiny {
+    padding-right: 5px;
+    vertical-align: middle;
+}

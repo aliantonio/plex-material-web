@@ -7,30 +7,26 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 
 @Component({
-  selector: 'app-activity',
-  templateUrl: './activity.component.html',
-  styleUrls: ['./activity.component.css']
+  selector: 'app-requests',
+  templateUrl: './requests.component.html',
+  styleUrls: ['./requests.component.css']
 })
-export class ActivityComponent implements OnInit {
+export class RequestsComponent implements OnInit {
 
-  currentResults: string[];
-  previousResults: string[];
-  lazy: number;
+  requests: string[];
 
   constructor(private http: Http, private jsonp: Jsonp) { }
 
   ngOnInit() {
-    //this.getCurrentActivity();
-    this.subscribePrevActivity();
+    this.subscribeToRequests();
   }
 
-  subscribePrevActivity() {
-    this.getPreviousActivity()
+  subscribeToRequests() {
+    this.getRequests()
       .subscribe(
         data => {
           console.log(data);
-          this.lazy = 100;
-          this.previousResults = data;
+          this.requests = data;
         },
         err => {
           console.error(err);
@@ -38,16 +34,12 @@ export class ActivityComponent implements OnInit {
     )
   }
 
-  getPreviousActivity() {
-    return this.http.get('http://asliantonio.com/plex/php/dbquery.php')
+  getRequests() {
+    return this.http.get('http://asliantonio.com/plex/php/getrequests.php')
       .timeout(10000)
       .do(this.logResponse)
       .map(this.extractData)
       .catch(this.catchError);
-  }
-
-  onScroll() {
-    this.lazy += 10;
   }
 
   private logResponse(res: Response) {

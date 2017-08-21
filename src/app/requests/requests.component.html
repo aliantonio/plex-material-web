@@ -1,0 +1,24 @@
+<div class="requests-wrapper">
+  <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">mode_edit</i>
+          <input id="request" type="text" class="validate">
+          <label for="request">Request Movie / Show</label>
+          <button class="btn waves-effect waves-light" id="submit-request">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <ul class="collection with-header" id="list-requests">
+    <li class="collection-header"><h4 class="underline">Current Requests</h4></li>
+    <li class="collection-item avatar" *ngFor="let data of requests">
+      <img src="../assets/images/{{ data.USER_ID }}.jpg" class="circle responsive-img request-img">
+      <span class="title completed-{{data.CMPLTD}}">{{ data.USER_ID }}</span>
+      <p class="completed-{{data.CMPLTD}}">{{ data.REQUEST }}</p>
+      <p class="admin-msg" *ngIf="data.COMMENTS != ''"><i class="tiny material-icons">message</i>Message from Anthony: {{ data.COMMENTS }}</p>
+    </li>
+  </ul>
+</div>

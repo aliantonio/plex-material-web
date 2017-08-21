@@ -1,0 +1,19 @@
+.account-wrap {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.register {
+    text-decoration: underline;
+    padding-top: 10px;
+    /*font-size: 1.2em;
+    color: #fff;*/
+}
+
+.register a {
+    color: #fff;
+}
+
+.modal h4, .modal p {
+    color: #000;
+}

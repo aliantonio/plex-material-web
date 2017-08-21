@@ -5,7 +5,7 @@ body {
     background: #1F1F1F;
 }
 
-h1, h2, h3, h4, h5, p {
+h1, h2, h3, h4, h5, p, input[type=text], input[type=password] {
     color: #fff;
 }
 
@@ -21,4 +21,43 @@ button {
     background: #FF9625 !important;
     text-transform: uppercase;
     color: #fff !important;
+}
+
+ul { border: none !important; }
+
+ul li {
+    background-color: #1F1F1F !important;
+    border: none !important;
+    color: #fff !important;
+}
+
+i, .title {
+    color: #FF9625 !important;
+}
+
+input.valid:not([type]), input.valid:not([type]):focus, input[type=text].valid:not(.browser-default), input[type=text].valid:not(.browser-default):focus, input[type=password].valid:not(.browser-default), input[type=password].valid:not(.browser-default):focus, input[type=email].valid:not(.browser-default), input[type=email].valid:not(.browser-default):focus, input[type=url].valid:not(.browser-default), input[type=url].valid:not(.browser-default):focus, input[type=time].valid:not(.browser-default), input[type=time].valid:not(.browser-default):focus, input[type=date].valid:not(.browser-default), input[type=date].valid:not(.browser-default):focus, input[type=datetime].valid:not(.browser-default), input[type=datetime].valid:not(.browser-default):focus, input[type=datetime-local].valid:not(.browser-default), input[type=datetime-local].valid:not(.browser-default):focus, input[type=tel].valid:not(.browser-default), input[type=tel].valid:not(.browser-default):focus, input[type=number].valid:not(.browser-default), input[type=number].valid:not(.browser-default):focus, input[type=search].valid:not(.browser-default), input[type=search].valid:not(.browser-default):focus, textarea.materialize-textarea.valid, textarea.materialize-textarea.valid:focus, .select-wrapper.valid > input.select-dropdown {
+    border-bottom: #FF9625 !important;
+    box-shadow: 0 1px 0 0 #FF9625 !important;
+}
+
+label {
+    color: #FF9625 !important
+}
+
+input[type=text]:focus, input[type=password]:focus {
+    border-bottom: #FF9625 !important;
+    box-shadow: 0 1px 0 0 #FF9625 !important;
+    color: #fff;
+}
+
+.underline {
+    /*text-decoration: underline;*/
+}
+
+.completed-Y {
+	text-decoration: line-through;
+}
+
+.admin-msg {
+	padding-top: 10px !important;
 }
