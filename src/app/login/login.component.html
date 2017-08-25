@@ -1,0 +1,32 @@
+<div class="account-wrap">
+  <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="username" type="text" class="validate" #username>
+          <label for="username">Username</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="password" class="validate" #password>
+          <label for="password">Password</label>
+          <button class="btn waves-effect waves-light" id="submit-login" (click)="login();$event.preventDefault();">Login</button>
+          <div class="register"><a href="">Need an account?</a></div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Modal Window -->
+  <div id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalActions">
+    <div class="modal-content">
+      <h4>{{ modalTitle }}</h4>
+      <p> {{modalMsg}} </p>
+    </div>
+    <div class="modal-footer">
+      <a class="waves-effect waves-green btn-flat" (click)="closeModal()">Close</a>
+    </div>
+  </div>
+
+</div>

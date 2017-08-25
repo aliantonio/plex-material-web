@@ -11,7 +11,7 @@ i {
     color: grey !important;
 }
 
-i.active, i.tiny {
+i.active, i.tiny, .admin-msg {
     color: #FF9625 !important;
 }
 
@@ -22,4 +22,8 @@ i.active, i.tiny {
 i.tiny {
     padding-right: 5px;
     vertical-align: middle;
+}
+
+a {
+    cursor: pointer;
 }

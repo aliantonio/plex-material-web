@@ -1,7 +1,5 @@
-import { Component, OnInit, ViewChild, EventEmitter } from '@angular/core';
-import { Md5 } from 'ts-md5/dist/md5';
-import { LoginService } from "../login.service";
-import { MaterializeAction } from 'angular2-materialize';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account',
@@ -10,36 +8,33 @@ import { MaterializeAction } from 'angular2-materialize';
 })
 export class AccountComponent implements OnInit {
 
-  @ViewChild('username') username;
-  @ViewChild('password') password;
-  modalActions = new EventEmitter<string|MaterializeAction>();
-  
-  constructor(private md5: Md5, private loginService: LoginService) { }
+  username = localStorage.getItem('userid');
+
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
-  login() {
-    let user = this.username.nativeElement.value;
-    let pass = this.password.nativeElement.value;
-
-    if (user == '' || pass == '' || user == undefined || pass == undefined) {
-      console.log('empty credentials');
-      this.openModal();
-      return;
+  resolve() {
+    console.log('resolving state of authentication');
+    if (localStorage.getItem('userid') === null) {
+      console.log('user not signed in, redirecting to login page');
+      this.router.navigateByUrl('/login');
     }
-
-    let encryptPass = Md5.hashStr(pass || '');
-    console.log("unencryped : " + pass + ", encrypted : " + encryptPass);
-
   }
 
-  openModal() {
-    this.modalActions.emit({ action: "modal", params: ["open"] });
+  logout() {
+    localStorage.clear();
+    console.log('local storage cleared, user logged out');
+    this.router.navigateByUrl('/login');
   }
 
-  closeModal() {
-    this.modalActions.emit({ action: "modal", params: ["close"] });
-  }
+  // $scope.logout = function () {
+  //   $window.localStorage.clear();
+  //   console.log('local storage cleared');
+  //   $scope.username = "";
+  //   $scope.password = "";
+  //   $state.go('login', {});
+  // }  
 
 }

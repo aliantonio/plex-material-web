@@ -1,3 +1,4 @@
+// angular imports
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
@@ -6,24 +7,28 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import 'hammerjs';
 import { ReCaptchaModule } from 'angular2-recaptcha';
 import { JsonpModule } from '@angular/http';
+import { RouterModule, Routes } from '@angular/router';
 
+// custom components
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { StatusComponent } from './status/status.component';
-import { PingServerService } from "./ping-server.service";
-import { JoinAPIService } from "./join-api.service";
-import { Md5 } from 'ts-md5/dist/md5';
-import { LoginService } from "./login.service";
-
-import { RouterModule, Routes } from '@angular/router';
-
 import { ActivityComponent } from './activity/activity.component';
-
-import { MaterializeModule } from "angular2-materialize";
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ActivityDetailsComponent } from './activity-details/activity-details.component';
 import { RequestsComponent } from './requests/requests.component';
+import { LoginComponent } from './login/login.component';
 import { AccountComponent } from './account/account.component';
+
+// custom services
+import { PingServerService } from './ping-server.service';
+import { JoinAPIService } from './join-api.service';
+import { LoginService } from './login.service';
+import { LoaderService } from './loader.service';
+
+// node modules
+import { MaterializeModule } from 'angular2-materialize';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { Md5 } from 'ts-md5/dist/md5';
 
 const appRoutes: Routes = [
   {
@@ -43,8 +48,15 @@ const appRoutes: Routes = [
     component: RequestsComponent
   },
   {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
     path: 'account',
-    component: AccountComponent
+    component: AccountComponent,
+    resolve: {
+      resolve: AccountComponent
+    }
   }
   // {
   //   path: '',
@@ -61,6 +73,7 @@ const appRoutes: Routes = [
     ActivityComponent,
     ActivityDetailsComponent,
     RequestsComponent,
+    LoginComponent,
     AccountComponent
   ],
   imports: [
@@ -75,7 +88,7 @@ const appRoutes: Routes = [
     InfiniteScrollModule
   ],
   exports: [MaterializeModule],
-  providers: [PingServerService, JoinAPIService, Md5, LoginService],
+  providers: [PingServerService, JoinAPIService, Md5, LoginService, AccountComponent, LoaderService],
   entryComponents: [],
   bootstrap: [AppComponent]
 })

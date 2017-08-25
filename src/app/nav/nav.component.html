@@ -1,10 +1,3 @@
-<!-- <md-toolbar color="primary">
-  <a md-button class="mat-button" routerLink="/" routerLinkActive="active">Status</a>
-  <a md-button class="mat-button" routerLink="/activity" routerLinkActive="active">Activity</a>
-  <a md-button class="mat-button" routerLink="/requests" routerLinkActive="active">Requests</a>
-  <a md-button class="mat-button" routerLink="/account" routerLinkActive="active">Account</a>
-</md-toolbar> -->
-
 <nav>
     <div class="nav-wrapper">
       <a materialize="sideNav" [materializeParams]="[{closeOnClick:true}]" href="#" data-activates="nav-menu" class="button-collapse"><i class="material-icons">menu</i></a>
@@ -12,7 +5,9 @@
         <li><a class="nav-link" routerLink="/" routerLinkActive="active">Status</a></li>
         <li><a class="nav-link" routerLink="/activity" routerLinkActive="active">Activity</a></li>
         <li><a class="nav-link" routerLink="/requests" routerLinkActive="active">Requests</a></li>
-        <li><a class="nav-link" routerLink="/account" routerLinkActive="active">Account</a></li>
+        <li>
+          <a class="nav-link" routerLink="/account" routerLinkActive="active">Account</a>
+        </li>
       </ul>
       <ul class="side-nav" id="nav-menu">
         <li><a class="nav-link" routerLink="/" routerLinkActive="active">Status</a></li>

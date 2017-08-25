@@ -61,3 +61,10 @@ input[type=text]:focus, input[type=password]:focus {
 .admin-msg {
 	padding-top: 10px !important;
 }
+
+.modal {
+    width: 35% !important;
+}
+
+.indeterminate {background: #f9d1a9 !important;}
+.progress {background: #FF9625 !important; visibility: hidden;}

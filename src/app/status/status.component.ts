@@ -6,6 +6,7 @@ import { IntervalObservable } from "rxjs/observable/IntervalObservable";
 import { PingServerService } from "../ping-server.service";
 import { ReCaptchaComponent } from 'angular2-recaptcha';
 import { JoinAPIService } from '../join-api.service';
+import { LoaderService } from '../loader.service';
 
 @Component({
   selector: 'app-status',
@@ -20,13 +21,14 @@ export class StatusComponent implements OnInit {
   @ViewChild(ReCaptchaComponent) captcha: ReCaptchaComponent;
 
   constructor(private http: Http, private pingServer: PingServerService,
-    private joinAPI: JoinAPIService, private jsonp: Jsonp) {
+    private joinAPI: JoinAPIService, private jsonp: Jsonp, private loader: LoaderService) {
     this.alive = true;
     this.requestSent = false;
   }
 
   ngOnInit() {
     this.alive = true;
+    this.loader.show();
     this.checkStatus();
   }
 
@@ -38,11 +40,13 @@ export class StatusComponent implements OnInit {
         .subscribe((data) => {
           console.log(data);
           this.isPoweredOn = true;
+          this.loader.hide();
         },
         err => {
           this.ngOnDestroy();
           console.error(err);
           this.isPoweredOn = false;
+          this.loader.hide();
       });
     });
   }
@@ -61,12 +65,7 @@ export class StatusComponent implements OnInit {
     } else {
       console.log('power button triggered');
       this.requestSent = true;
-
-      // setTimeout(function(){
- //        $.get("http://ipinfo.io", function(response) {
-           this.joinAPI.push("plex%20request", "");
-   //      }, "jsonp");
-     //  }, 2000);
+      this.joinAPI.push("plex%20request", "");
     }
   }
 

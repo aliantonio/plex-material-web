@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Http, Jsonp, Response } from '@angular/http';
 import { Observable } from "rxjs";
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
+import { LoaderService } from '../loader.service';
+import { toast } from 'angular2-materialize';
 
 @Component({
   selector: 'app-activity',
@@ -16,11 +18,12 @@ export class ActivityComponent implements OnInit {
   currentResults: string[];
   previousResults: string[];
   lazy: number;
+  Materialize: any;
 
-  constructor(private http: Http, private jsonp: Jsonp) { }
+  constructor(private http: Http, private jsonp: Jsonp, private loader: LoaderService) { }
 
   ngOnInit() {
-    //this.getCurrentActivity();
+    this.loader.show();
     this.subscribePrevActivity();
   }
 
@@ -31,9 +34,12 @@ export class ActivityComponent implements OnInit {
           console.log(data);
           this.lazy = 100;
           this.previousResults = data;
+          this.loader.hide();
         },
         err => {
           console.error(err);
+          this.loader.hide();
+          toast('Something went wrong. Please check your internet connection.', 7000, 'rounded');
         }
     )
   }
@@ -59,8 +65,8 @@ export class ActivityComponent implements OnInit {
   }
   
   private catchError(error: Response) {
-    console.error(error);
-    return Observable.throw(error.json().error || "Server error.");
+    //onsole.error(error);
+    return Observable.throw(error || "Server error.");
   }
 
 }

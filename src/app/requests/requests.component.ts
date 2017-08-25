@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Http, Jsonp, Response } from '@angular/http';
 import { Observable } from "rxjs";
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
+import { MaterializeAction } from 'angular2-materialize';
+import { LoaderService } from '../loader.service';
 
 @Component({
   selector: 'app-requests',
@@ -14,10 +16,12 @@ import 'rxjs/add/operator/catch';
 export class RequestsComponent implements OnInit {
 
   requests: string[];
-
-  constructor(private http: Http, private jsonp: Jsonp) { }
+  modalActions = new EventEmitter<string|MaterializeAction>();
+  
+  constructor(private http: Http, private jsonp: Jsonp, private loader: LoaderService) { }
 
   ngOnInit() {
+    this.loader.show();
     this.subscribeToRequests();
   }
 
@@ -27,9 +31,11 @@ export class RequestsComponent implements OnInit {
         data => {
           console.log(data);
           this.requests = data;
+          this.loader.hide();
         },
         err => {
           console.error(err);
+          this.loader.hide();
         }
     )
   }
@@ -40,6 +46,11 @@ export class RequestsComponent implements OnInit {
       .do(this.logResponse)
       .map(this.extractData)
       .catch(this.catchError);
+  }
+
+  showSecondary(event, index) {
+    console.log(event, index);
+    this.modalActions.emit({ action: "dropdown", params: ['open'] });
   }
 
   private logResponse(res: Response) {
