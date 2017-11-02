@@ -24,11 +24,14 @@ import { PingServerService } from './ping-server.service';
 import { JoinAPIService } from './join-api.service';
 import { LoginService } from './login.service';
 import { LoaderService } from './loader.service';
+import { DataStoreService } from './data-store.service';
 
 // node modules
 import { MaterializeModule } from 'angular2-materialize';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { Md5 } from 'ts-md5/dist/md5';
+import { StarRatingModule } from 'angular-star-rating';
+import { DateFormatPipe } from './date-format.pipe';
 
 const appRoutes: Routes = [
   {
@@ -74,7 +77,8 @@ const appRoutes: Routes = [
     ActivityDetailsComponent,
     RequestsComponent,
     LoginComponent,
-    AccountComponent
+    AccountComponent,
+    DateFormatPipe
   ],
   imports: [
     BrowserModule,
@@ -85,10 +89,11 @@ const appRoutes: Routes = [
     ReCaptchaModule,
     JsonpModule,
     MaterializeModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    StarRatingModule.forRoot()
   ],
   exports: [MaterializeModule],
-  providers: [PingServerService, JoinAPIService, Md5, LoginService, AccountComponent, LoaderService],
+  providers: [PingServerService, JoinAPIService, Md5, LoginService, AccountComponent, LoaderService, DataStoreService],
   entryComponents: [],
   bootstrap: [AppComponent]
 })

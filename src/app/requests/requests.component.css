@@ -27,3 +27,15 @@ i.tiny {
 a {
     cursor: pointer;
 }
+
+.collection-item .btn {
+    background-color: inherit !important;
+}
+
+.secondary-content i, .dropdown-content li > a, .dropdown-content li > span {
+    color: #FFF;
+}
+
+.delete { color: red !important; }
+
+.modal-comments { color: #000 !important; }

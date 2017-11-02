@@ -7,6 +7,7 @@ import { PingServerService } from "../ping-server.service";
 import { ReCaptchaComponent } from 'angular2-recaptcha';
 import { JoinAPIService } from '../join-api.service';
 import { LoaderService } from '../loader.service';
+import { toast } from 'angular2-materialize';
 
 @Component({
   selector: 'app-status',
@@ -18,12 +19,14 @@ export class StatusComponent implements OnInit {
   private alive: boolean;
   private isPoweredOn: boolean;
   private requestSent: boolean;
+  private reportSent: boolean;
   @ViewChild(ReCaptchaComponent) captcha: ReCaptchaComponent;
 
   constructor(private http: Http, private pingServer: PingServerService,
     private joinAPI: JoinAPIService, private jsonp: Jsonp, private loader: LoaderService) {
     this.alive = true;
     this.requestSent = false;
+    this.reportSent = false;
   }
 
   ngOnInit() {
@@ -33,7 +36,7 @@ export class StatusComponent implements OnInit {
   }
 
   checkStatus() {
-    Observable.timer(0, 5000)
+    Observable.timer(0, 5000) // 5 seconds
     .takeWhile(() => this.alive)
     .subscribe(() => {
       this.pingServer.ping()
@@ -44,7 +47,7 @@ export class StatusComponent implements OnInit {
         },
         err => {
           this.ngOnDestroy();
-          console.error(err);
+          console.error(err + " - computer is likely not powered on.");
           this.isPoweredOn = false;
           this.loader.hide();
       });
@@ -60,12 +63,26 @@ export class StatusComponent implements OnInit {
     console.log('power button clicked');
     let token = this.captcha.getResponse();
     if (token == "" || token == undefined) {
-      console.log('captcha token not generated, triggering modal.');
+      console.log('captcha token not generated.');
+      toast("Prove you're not a robot. Click the captcha before turning on Plex.", 4000, 'rounded');
       //this.dialog.show('Are you a robot?', 'Click the captcha before turning on Plex.');
     } else {
       console.log('power button triggered');
+      this.joinAPI.push("plex%20request");
       this.requestSent = true;
-      this.joinAPI.push("plex%20request", "");
+    }
+  }
+
+  report() {
+    let token = this.captcha.getResponse();
+    if ( this.reportSent ) {
+      toast("A report has already been sent.", 4000, 'rounded');
+    } else if (token == "" || token == undefined) {
+      toast("Click the captcha before sending report to Anthony.", 4000, 'rounded');
+    } else {
+      console.log('power button triggered');
+      this.joinAPI.push("check%20plex");
+      this.reportSent = true;
     }
   }
 

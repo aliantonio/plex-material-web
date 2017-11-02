@@ -1,0 +1,12 @@
+.activity-dtl-wrap {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.label, .label-info {
+    color: #FF9625;
+}
+
+textarea {
+    color: #fff;
+}

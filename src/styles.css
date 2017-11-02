@@ -17,7 +17,7 @@ html {
     background: #1F1F1F !important;
 }
 
-button {
+button, .btn {
     background: #FF9625 !important;
     text-transform: uppercase;
     color: #fff !important;
@@ -68,3 +68,12 @@ input[type=text]:focus, input[type=password]:focus {
 
 .indeterminate {background: #f9d1a9 !important;}
 .progress {background: #FF9625 !important; visibility: hidden;}
+
+.rating {
+    justify-content: left !important;
+    align-items: left !important;
+}
+
+.modal-content h4, .modal-content p {
+    color: #000;
+}

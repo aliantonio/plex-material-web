@@ -11,6 +11,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import { Router } from '@angular/router';
 import { LoaderService } from '../loader.service';
+import { DataStoreService } from '../data-store.service';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,7 @@ export class LoginComponent implements OnInit {
   modalActions = new EventEmitter<string|MaterializeAction>();
   
   constructor(private md5: Md5, private loginService: LoginService, private http: Http,
-      private router: Router, private loader: LoaderService) { }
+      private router: Router, private loader: LoaderService, private dataStore: DataStoreService) { }
 
   ngOnInit() {
   }
@@ -50,8 +51,7 @@ export class LoginComponent implements OnInit {
       urlSearchParams.set('password', encryptPass.toString());
       let body = urlSearchParams.toString();   
 
-      let headers = new Headers({
-        'Content-Type': 'application/x-www-form-urlencoded'}); 
+      let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'}); 
       let options = new RequestOptions({ headers: headers });
 
       this.callLogin(body, options)
@@ -65,7 +65,13 @@ export class LoginComponent implements OnInit {
             console.log('successfully logged in');
             console.log('localStorage auth', user);
             localStorage.setItem('userid', user);
-            this.router.navigateByUrl('/account');
+            console.log(this.dataStore.getRedirectUrl());
+            if (this.dataStore.getRedirectUrl() == undefined) {
+              this.router.navigateByUrl('/account');
+            } else {
+              this.router.navigateByUrl(this.dataStore.getRedirectUrl());
+            }
+            
           }
           this.loader.hide();
         },
@@ -77,7 +83,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  callLogin(body, options) {
+  private callLogin(body, options) {
     return this.http.post('http://asliantonio.com/plex/php/login.php', body, options)
       .timeout(10000)
       .do(this.logResponse)
@@ -98,13 +104,13 @@ export class LoginComponent implements OnInit {
     return Observable.throw(error.json().error || "Server error.");
   }
 
-  openModal(title, message) {
+  private openModal(title, message) {
     this.modalTitle = title;
     this.modalMsg = message;
     this.modalActions.emit({ action: "modal", params: ["open"] });
   }
 
-  closeModal() {
+  private closeModal() {
     this.modalActions.emit({ action: "modal", params: ["close"] });
   }
 

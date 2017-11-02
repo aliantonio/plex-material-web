@@ -4,9 +4,9 @@
       <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">mode_edit</i>
-          <input id="request" type="text" class="validate">
+          <input id="request" type="text" class="validate" #mediaRequest (keydown.enter)="onEnter($event);">
           <label for="request">Request Movie / Show</label>
-          <button class="btn waves-effect waves-light" id="submit-request">Submit</button>
+          <a class='waves-effect waves-light btn' id='submit' (click)="submitRequest($event);">Submit</a>
         </div>
       </div>
     </form>
@@ -19,7 +19,30 @@
       <span class="title completed-{{data.CMPLTD}}">{{ data.USER_ID }}</span>
       <p class="completed-{{data.CMPLTD}}">{{ data.REQUEST }}</p>
       <p class="admin-msg" *ngIf="data.COMMENTS != ''"><i class="tiny material-icons">message</i>Message from Anthony: {{ data.COMMENTS }}</p>
-      <span class="secondary-content"><i class="material-icons">more_vert</i></span>
+      <a materialize="dropdown" class='secondary-content dropdown-button btn' href='#' [attr.data-activates]='data.ID'>
+          <ul id='{{data.ID}}' class='dropdown-content'>
+            <li><a (click)="complete(data.ID)">Complete</a></li>
+            <li><a (click)="comment(data.USER_ID, data.REQUEST, data.ID)">Comment</a></li>
+            <li class="divider"></li>
+            <li><a class="delete" (click)="delete(i, data.ID)">Delete</a></li>
+          </ul>
+          <i class="material-icons">more_vert</i>
+      </a>
     </li>
   </ul>
+
+  <!-- Modal Window -->
+  <div id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalActions">
+    <div class="modal-content">
+      <h4> {{ modalTitle }}</h4>
+      <p> {{modalMsg}} </p>
+      <div *ngIf="isComments"><input type="text" class="modal-comments" #comments></div>
+    </div>
+    <div class="modal-footer">
+      <a class="waves-effect waves-green btn-flat" (click)="closeModal()">Close</a>
+      <a class="waves-effect waves-green btn-flat" *ngIf="!isLoggedIn" (click)="login()">Sign In</a>
+      <a class="waves-effect waves-green btn-flat" *ngIf="isComments" (click)="submitComments()">Submit</a>
+    </div>
+  </div>
+
 </div>

@@ -14,7 +14,7 @@ i {
     vertical-align: top;
 }
 
-#report i {
+#report i, #power-on i {
     color: #fff !important;
 }
 
