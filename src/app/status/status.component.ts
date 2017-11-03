@@ -17,7 +17,7 @@ import { toast } from 'angular2-materialize';
 export class StatusComponent implements OnInit {
 
   private alive: boolean;
-  private isPoweredOn: boolean;
+  isPoweredOn: boolean;
   private requestSent: boolean;
   private reportSent: boolean;
   @ViewChild(ReCaptchaComponent) captcha: ReCaptchaComponent;
@@ -46,7 +46,7 @@ export class StatusComponent implements OnInit {
           this.loader.hide();
         },
         err => {
-          this.ngOnDestroy();
+          //this.ngOnDestroy();
           console.error(err + " - computer is likely not powered on.");
           this.isPoweredOn = false;
           this.loader.hide();

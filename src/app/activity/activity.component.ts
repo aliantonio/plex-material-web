@@ -25,6 +25,23 @@ export class ActivityComponent implements OnInit {
   ngOnInit() {
     this.loader.show();
     this.subscribePrevActivity();
+    this.subscribeCurrActivity();
+  }
+
+  subscribeCurrActivity() {
+    this.getCurrActivity()
+    .subscribe(
+      data => {
+        console.log(data);
+        this.currentResults = data.MediaContainer.Video;
+        this.loader.hide();
+      },
+      err => {
+        console.error(err);
+        //this.loader.hide();
+        toast('Something went wrong. Please check your internet connection.', 7000, 'rounded');
+      }
+    )
   }
 
   subscribePrevActivity() {
@@ -42,6 +59,14 @@ export class ActivityComponent implements OnInit {
           toast('Something went wrong. Please check your internet connection.', 7000, 'rounded');
         }
     )
+  }
+
+  getCurrActivity() {
+    return this.http.get('http://asliantonio.dyndns.org:32400/status/sessions?X-Plex-Token=MbxwPyCXzVwkYQ7ESW87')
+    .timeout(10000)
+    .do(this.logResponse)
+    .map(this.extractData)
+    .catch(this.catchError);
   }
 
   getPreviousActivity() {

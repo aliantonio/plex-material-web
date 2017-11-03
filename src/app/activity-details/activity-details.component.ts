@@ -21,7 +21,7 @@ export class ActivityDetailsComponent implements OnInit {
 
   name: string;
   dtls: string;
-  id: number;
+  id: string;
   usercomments: string;
   stars: number;
   modalTitle: string;
@@ -121,7 +121,7 @@ export class ActivityDetailsComponent implements OnInit {
     this.modalActions.emit({ action: "modal", params: ["open"] });
   }
 
-  private closeModal() {
+  closeModal() {
     this.modalActions.emit({ action: "modal", params: ["close"] });
   }
 
@@ -145,7 +145,7 @@ export class ActivityDetailsComponent implements OnInit {
     let body = new URLSearchParams();
     let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
     let options = new RequestOptions({ headers: headers });
-    body.append('id', this.id.toString());
+    body.append('id', this.id);
     body.append('name', this.name);
     body.append('content', this.dtls);
     body.append('rating', this.stars.toString());

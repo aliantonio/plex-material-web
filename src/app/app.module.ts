@@ -60,12 +60,12 @@ const appRoutes: Routes = [
     resolve: {
       resolve: AccountComponent
     }
+  },
+  {
+    path: '',
+    redirectTo: 'status',
+    pathMatch: 'full'
   }
-  // {
-  //   path: '',
-  //   redirectTo: '/status',
-  //   pathMatch: 'full'
-  // }
 ]
 
 @NgModule({

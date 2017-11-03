@@ -110,7 +110,7 @@ export class LoginComponent implements OnInit {
     this.modalActions.emit({ action: "modal", params: ["open"] });
   }
 
-  private closeModal() {
+  closeModal() {
     this.modalActions.emit({ action: "modal", params: ["close"] });
   }
 

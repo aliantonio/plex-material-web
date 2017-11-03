@@ -1,9 +1,9 @@
 <ul class="collection with-header" id="list-activity">
   <li class="collection-header"><h4>Currently Watching</h4></li>
   <li class="collection-item avatar" *ngFor="let current of currentResults">
-    <img src="../assets/images/{{ current.User._title }}.jpg" class="circle">
-    <span class="title">{{ current._title }}</span>
-    <p>{{ current.User._title }} - {{ current.Player._device }}</p>
+    <img src="./assets/images/{{ current.User.title }}.jpg" class="circle">
+    <span class="title">{{ current.title }}</span>
+    <p>{{ current.User.title }} - {{ current.Player.device }}</p>
   </li>
   <li class="collection-header"><h4>Previously Watched</h4></li>
   <a class="nav-link" *ngFor="let previous of previousResults | slice:0:lazy; let i=index" 
@@ -13,7 +13,7 @@
     (scrolled)="onScroll()"
     routerLink="/activity/{{previous.USER_ID}}/{{previous.MEDIA_CONTENT}}" routerLinkActive="active">
     <li class="collection-item avatar">
-        <img src="../assets/images/{{ previous.USER_ID }}.jpg" class="circle">
+        <img src="./assets/images/{{ previous.USER_ID }}.jpg" class="circle">
         <span class="title">{{ previous.MEDIA_CONTENT }}</span>
         <p>{{ previous.USER_ID }} - {{ previous.TIMESTAMP | dateFormat | date:'MM/dd/yyyy hh:mma' : 'UTC' }}</p>
         <span class="secondary-content"><i class="material-icons">arrow_forward</i></span>

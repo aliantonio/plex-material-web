@@ -203,7 +203,7 @@ export class RequestsComponent implements OnInit {
     this.modalActions.emit({ action: "modal", params: ["open"] });
   }
 
-  private closeModal() {
+  closeModal() {
     this.modalActions.emit({ action: "modal", params: ["close"] });
   }
 

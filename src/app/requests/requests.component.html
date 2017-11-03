@@ -15,7 +15,7 @@
   <ul class="collection with-header" id="list-requests">
     <li class="collection-header"><h4 class="underline">Current Requests</h4></li>
     <li class="collection-item avatar" *ngFor="let data of requests; let i = index">
-      <img src="../assets/images/{{ data.USER_ID }}.jpg" class="circle responsive-img request-img">
+      <img src="./assets/images/{{ data.USER_ID }}.jpg" class="circle responsive-img request-img">
       <span class="title completed-{{data.CMPLTD}}">{{ data.USER_ID }}</span>
       <p class="completed-{{data.CMPLTD}}">{{ data.REQUEST }}</p>
       <p class="admin-msg" *ngIf="data.COMMENTS != ''"><i class="tiny material-icons">message</i>Message from Anthony: {{ data.COMMENTS }}</p>

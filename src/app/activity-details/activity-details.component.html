@@ -1,14 +1,14 @@
 <div class="activity-dtl-wrap">
   <ul class="collection" style="border: none;">
     <li class="collection-item avatar">
-      <img src="../assets/images/{{name}}.jpg" alt="" class="circle">
+      <img src="./assets/images/{{name}}.jpg" alt="" class="circle">
       <span class="title"><h5>{{dtls}}</h5></span>
     </li>
   </ul>
 
   <div class="row">
     <div class="col s12 m5" style="padding-left: 15px;">
-        <div class=""> <span class="label label-info">{{stars == "0" ? "Not yet rated. Tap to rate." : "Rated " + stars + " out of 10"}}</span>
+        <div class=""> <span class="label label-info">{{stars == undefined ? "Not yet rated. Tap to rate." : "Rated " + stars + " out of 10"}}</span>
           <star-rating-comp [starType]="'svg'" 
             [hoverEnabled]="true" 
             (onClick)="updateRating($event, false)" 
