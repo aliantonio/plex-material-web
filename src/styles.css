@@ -62,10 +62,6 @@ input[type=text]:focus, input[type=password]:focus {
 	padding-top: 10px !important;
 }
 
-.modal {
-    width: 35% !important;
-}
-
 .indeterminate {background: #f9d1a9 !important;}
 .progress {background: #FF9625 !important; visibility: hidden;}
 
@@ -74,6 +70,15 @@ input[type=text]:focus, input[type=password]:focus {
     align-items: left !important;
 }
 
-.modal-content h4, .modal-content p {
+.modal-content h5, .modal-content p {
     color: #000;
+}
+
+/*RESPONSIVE CODE*/
+@media screen and (max-width: 550px) {
+
+    #list-activity, .activity-dtl-wrap, .requests-wrapper, .modal, .account-wrap, .acct-details-wrap {
+        width: 100% !important;
+    }
+    
 }

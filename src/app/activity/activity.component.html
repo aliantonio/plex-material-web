@@ -1,11 +1,11 @@
 <ul class="collection with-header" id="list-activity">
-  <li class="collection-header"><h4>Currently Watching</h4></li>
+  <li class="collection-header"><h5>Currently Watching</h5></li>
   <li class="collection-item avatar" *ngFor="let current of currentResults">
     <img src="./assets/images/{{ current.User.title }}.jpg" class="circle">
     <span class="title">{{ current.title }}</span>
     <p>{{ current.User.title }} - {{ current.Player.device }}</p>
   </li>
-  <li class="collection-header"><h4>Previously Watched</h4></li>
+  <li class="collection-header"><h5>Previously Watched</h5></li>
   <a class="nav-link" *ngFor="let previous of previousResults | slice:0:lazy; let i=index" 
     infiniteScroll 
     [infiniteScrollDistance]="1" 
