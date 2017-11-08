@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, EventEmitter } from '@angular/core';
 import { Http, Jsonp, Response, RequestOptions, Headers } from '@angular/http';
+import { HttpParams } from '@angular/common/http';
 import { Observable } from "rxjs";
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
@@ -57,7 +58,18 @@ export class ActivityDetailsComponent implements OnInit {
           console.error(err);
           this.loader.hide();
         }
-    )
+    );
+    // this.getImdbRatings()
+    //   .subscribe(
+    //     data => {
+    //       console.log(data);
+    //       this.loader.hide();
+    //     },
+    //     err => {
+    //       console.error(err);
+    //       this.loader.hide();
+    //     }
+    // );
   }
 
   updateRating = ($event:OnClickEvent, isComments: boolean) => {
@@ -123,6 +135,19 @@ export class ActivityDetailsComponent implements OnInit {
 
   closeModal() {
     this.modalActions.emit({ action: "modal", params: ["close"] });
+  }
+
+  private getImdbRatings() {
+    let body = new HttpParams();
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    body.set('t', "baby driver");
+    body.set('apikey', "288b0aab");
+
+    return this.http.get("http://www.omdbapi.com/", {params: body})
+      .do(this.logResponse)
+      .map(this.extractData)
+      .catch(this.catchError);
   }
 
   private getMediaDetails() {

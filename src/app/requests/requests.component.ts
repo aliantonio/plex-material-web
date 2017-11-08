@@ -26,9 +26,12 @@ export class RequestsComponent implements OnInit {
   isLoggedIn: boolean;
   isComments: boolean;
   id: string;
-  modalActions = new EventEmitter<string|MaterializeAction>();
+  modalActions = new EventEmitter<string | MaterializeAction>();
+  userLoggedIn: string;
   
-  constructor(private http: Http, private jsonp: Jsonp, private loader: LoaderService, private router: Router, private dataStore: DataStoreService) { }
+  constructor(private http: Http, private jsonp: Jsonp, private loader: LoaderService, private router: Router, private dataStore: DataStoreService) { 
+    this.userLoggedIn = localStorage.getItem('userid');
+  }
 
   ngOnInit() {
     this.loader.show();

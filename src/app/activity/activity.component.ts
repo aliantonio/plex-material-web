@@ -38,8 +38,6 @@ export class ActivityComponent implements OnInit {
       },
       err => {
         console.error(err);
-        //this.loader.hide();
-        //toast('Something went wrong. Please check your internet connection.', 7000, 'rounded');
       }
     )
   }

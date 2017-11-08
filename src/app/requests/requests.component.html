@@ -19,7 +19,7 @@
       <span class="title completed-{{data.CMPLTD}}">{{ data.USER_ID }}</span>
       <p class="completed-{{data.CMPLTD}}">{{ data.REQUEST }}</p>
       <p class="admin-msg" *ngIf="data.COMMENTS != ''"><i class="tiny material-icons">message</i>Message from Anthony: {{ data.COMMENTS }}</p>
-      <a materialize="dropdown" class='secondary-content dropdown-button btn' href='#' [attr.data-activates]='data.ID'>
+      <a materialize="dropdown" class='secondary-content dropdown-button btn' href='#' [attr.data-activates]='data.ID' *ngIf="userLoggedIn == 'aliantonio'">
           <ul id='{{data.ID}}' class='dropdown-content'>
             <li><a (click)="complete(data.ID)">Complete</a></li>
             <li><a (click)="comment(data.USER_ID, data.REQUEST, data.ID)">Comment</a></li>
