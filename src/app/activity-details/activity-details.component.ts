@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, EventEmitter } from '@angular/core';
 import { Http, Jsonp, Response, RequestOptions, Headers } from '@angular/http';
-import { HttpParams } from '@angular/common/http';
 import { Observable } from "rxjs";
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
@@ -33,6 +32,11 @@ export class ActivityDetailsComponent implements OnInit {
   onRatingChangeResult: OnRatingChangeEven;
   modalActions = new EventEmitter<string | MaterializeAction>();
   isLoggedIn: boolean;
+  genre: string;
+  plot: string;
+  imdb: string;
+  rotten: string;
+  imdbId: string;
 
   constructor(private http: Http, private jsonp: Jsonp, private loader: LoaderService,
     private route: ActivatedRoute, private router: Router, private dataStore: DataStoreService) { }
@@ -59,17 +63,22 @@ export class ActivityDetailsComponent implements OnInit {
           this.loader.hide();
         }
     );
-    // this.getImdbRatings()
-    //   .subscribe(
-    //     data => {
-    //       console.log(data);
-    //       this.loader.hide();
-    //     },
-    //     err => {
-    //       console.error(err);
-    //       this.loader.hide();
-    //     }
-    // );
+    this.getImdbRatings()
+      .subscribe(
+        data => {
+          console.log(data);
+          this.genre = data.Genre;
+          this.plot = data.Plot;
+          this.imdb = data.Ratings[0].Value;
+          this.rotten = data.Ratings[1].Value;
+          this.imdbId = data.imdbID;
+          this.loader.hide();
+        },
+        err => {
+          console.error(err);
+          this.loader.hide();
+        }
+    );
   }
 
   updateRating = ($event:OnClickEvent, isComments: boolean) => {
@@ -126,6 +135,19 @@ export class ActivityDetailsComponent implements OnInit {
     this.router.navigate(['login']);
   }
 
+  goToImdb() {
+    window.open('http://www.imdb.com/title/' + this.imdbId, '_system', 'location=yes');
+  }
+
+  private encode(v: string): string {
+      return v
+      .replace(/:/g, '')
+      .replace(/@/g, '')
+      .replace(/$/g, '')
+      .replace(/,/g, '')
+      .replace(/;/g, '')
+  }  
+
   private openModal(title, message, isLoggedIn) {
     this.modalTitle = title;
     this.modalMsg = message;
@@ -133,18 +155,18 @@ export class ActivityDetailsComponent implements OnInit {
     this.modalActions.emit({ action: "modal", params: ["open"] });
   }
 
-  closeModal() {
+  private closeModal() {
     this.modalActions.emit({ action: "modal", params: ["close"] });
   }
 
   private getImdbRatings() {
-    let body = new HttpParams();
+    let body = new URLSearchParams();
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    body.set('t', "baby driver");
+    body.set('t', this.encode(this.dtls));
     body.set('apikey', "288b0aab");
 
-    return this.http.get("http://www.omdbapi.com/", {params: body})
+    return this.http.get("http://www.omdbapi.com/?", {params: body.toString()})
       .do(this.logResponse)
       .map(this.extractData)
       .catch(this.catchError);

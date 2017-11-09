@@ -10,3 +10,18 @@
 textarea {
     color: #fff;
 }
+
+.rating-icon {
+    height: 50px;
+    width: auto;
+    vertical-align: middle;
+    padding-right: 5px;
+}
+
+.omdb-content li {
+    color: #FF9625 !important;
+}
+
+.omdb-rating {
+    color: #fff !important;
+}

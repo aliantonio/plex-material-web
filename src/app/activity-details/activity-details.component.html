@@ -6,9 +6,23 @@
     </li>
   </ul>
 
+  <ul class="omdb-content">
+    <li>{{genre}}</li>
+    <li>{{plot}}</li>
+  </ul>
+  <div class="row" *ngIf="imdb != undefined">
+    <div class="col s5" (click)='goToImdb()'>
+      <img src="./assets/images/imdb.png" alt="" class="imdb rating-icon">
+      <span class="omdb-rating imdb">{{imdb}}</span>
+    </div>
+    <div class="col s5">
+      <img src="./assets/images/rottentomatoes.png" alt="" class="rating-icon">
+      <span class="omdb-rating">{{rotten}}</span>
+    </div>
+  </div>
   <div class="row">
     <div class="col s12 m5" style="padding-left: 15px;">
-        <div class=""> <span class="label label-info">{{stars == undefined ? "Not yet rated. Tap to rate." : "Rated " + stars + " out of 10"}}</span>
+        <div class=""> <span class="label label-info">{{stars == undefined ? "Not yet rated by you. Tap to rate." : "You rated " + stars + " out of 10"}}</span>
           <star-rating-comp [starType]="'svg'" 
             [hoverEnabled]="true" 
             (onClick)="updateRating($event, false)" 

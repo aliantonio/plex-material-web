@@ -70,6 +70,10 @@ input[type=text]:focus, input[type=password]:focus {
     color: #000;
 }
 
+.imdb {
+    cursor: pointer;
+}
+
 /*RESPONSIVE CODE*/
 @media screen and (max-width: 550px) {
 
