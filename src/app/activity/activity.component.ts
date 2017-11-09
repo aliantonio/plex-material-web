@@ -7,6 +7,8 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import { LoaderService } from '../loader.service';
 import { toast } from 'angular2-materialize';
+import { Router } from '@angular/router';
+import { DataStoreService } from '../data-store.service';
 
 @Component({
   selector: 'app-activity',
@@ -20,7 +22,7 @@ export class ActivityComponent implements OnInit {
   lazy: number;
   Materialize: any;
 
-  constructor(private http: Http, private jsonp: Jsonp, private loader: LoaderService) { }
+  constructor(private http: Http, private jsonp: Jsonp, private loader: LoaderService, private router: Router, private dataStore: DataStoreService) { }
 
   ngOnInit() {
     this.loader.show();
@@ -77,6 +79,16 @@ export class ActivityComponent implements OnInit {
 
   onScroll() {
     this.lazy += 10;
+  }
+
+  navigateTo(type, user, title, showTitle, season, episode) {
+    this.dataStore.setType(type);
+    this.dataStore.setUser(user);
+    this.dataStore.setTitle(title);
+    this.dataStore.setShowTitle(showTitle);
+    this.dataStore.setSeason(season);
+    this.dataStore.setEpisode(episode);
+    this.router.navigateByUrl("/activity/"+user+"/"+title);
   }
 
   private logResponse(res: Response) {

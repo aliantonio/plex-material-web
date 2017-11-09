@@ -21,6 +21,7 @@ export class ActivityDetailsComponent implements OnInit {
 
   name: string;
   dtls: string;
+  type: string;
   id: string;
   usercomments: string;
   stars: number;
@@ -155,7 +156,7 @@ export class ActivityDetailsComponent implements OnInit {
     this.modalActions.emit({ action: "modal", params: ["open"] });
   }
 
-  private closeModal() {
+  closeModal() {
     this.modalActions.emit({ action: "modal", params: ["close"] });
   }
 
@@ -163,9 +164,16 @@ export class ActivityDetailsComponent implements OnInit {
     let body = new URLSearchParams();
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    body.set('t', this.encode(this.dtls));
+    
+    if (this.dataStore.getType() === 'movie' || this.dataStore.getType() === '') {
+      body.set('t', this.encode(this.dataStore.getTitle()));
+    } else if (this.dataStore.getType() === 'episode') {
+      body.set('t', this.dataStore.getShowTitle());
+      body.set('Season', this.dataStore.getSeason().slice(7)); // remove the word season from string
+      body.set('Episode', this.dataStore.getEpisode());
+    }
     body.set('apikey', "288b0aab");
-
+    
     return this.http.get("http://www.omdbapi.com/?", {params: body.toString()})
       .do(this.logResponse)
       .map(this.extractData)

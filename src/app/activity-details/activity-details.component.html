@@ -15,14 +15,14 @@
       <img src="./assets/images/imdb.png" alt="" class="imdb rating-icon">
       <span class="omdb-rating imdb">{{imdb}}</span>
     </div>
-    <div class="col s5">
+    <div class="col s5" *ngIf="rotten != undefined">
       <img src="./assets/images/rottentomatoes.png" alt="" class="rating-icon">
       <span class="omdb-rating">{{rotten}}</span>
     </div>
   </div>
   <div class="row">
     <div class="col s12 m5" style="padding-left: 15px;">
-        <div class=""> <span class="label label-info">{{stars == undefined ? "Not yet rated by you. Tap to rate." : "You rated " + stars + " out of 10"}}</span>
+        <div class=""> <span class="label label-info">{{stars == undefined ? "Not yet rated. Tap to rate." : "You rated " + stars + " out of 10"}}</span>
           <star-rating-comp [starType]="'svg'" 
             [hoverEnabled]="true" 
             (onClick)="updateRating($event, false)" 

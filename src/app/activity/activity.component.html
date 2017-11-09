@@ -6,12 +6,13 @@
     <p>{{ current.User.title }} - {{ current.Player.device }}</p>
   </li>
   <li class="collection-header"><h5>Previously Watched</h5></li>
-  <a class="nav-link" *ngFor="let previous of previousResults | slice:0:lazy; let i=index" 
+  <a class="nav-link" style="cursor: pointer;" *ngFor="let previous of previousResults | slice:0:lazy; let i=index" 
     infiniteScroll 
     [infiniteScrollDistance]="1" 
     [infiniteScrollThrottle]="300" 
     (scrolled)="onScroll()"
-    routerLink="/activity/{{previous.USER_ID}}/{{previous.MEDIA_CONTENT}}" routerLinkActive="active">
+    (click)="navigateTo(previous.TYPE, previous.USER_ID, previous.MEDIA_CONTENT, previous.SHOW_TITLE, previous.SEASON, previous.EPISODE_NUM)"
+    routerLinkActive="active">
     <li class="collection-item avatar">
         <img src="./assets/images/{{ previous.USER_ID }}.jpg" class="circle">
         <span class="title">{{ previous.MEDIA_CONTENT }}</span>
