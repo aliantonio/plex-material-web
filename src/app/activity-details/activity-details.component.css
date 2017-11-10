@@ -18,6 +18,10 @@ textarea {
     padding-right: 5px;
 }
 
+.omdb-content {
+    margin: 15px;
+}
+
 .omdb-content li {
     color: #FF9625 !important;
 }

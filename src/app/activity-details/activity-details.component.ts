@@ -35,9 +35,8 @@ export class ActivityDetailsComponent implements OnInit {
   isLoggedIn: boolean;
   genre: string;
   plot: string;
-  imdb: string;
-  rotten: string;
   imdbId: string;
+  omdbRatings: string[] = [];
 
   constructor(private http: Http, private jsonp: Jsonp, private loader: LoaderService,
     private route: ActivatedRoute, private router: Router, private dataStore: DataStoreService) { }
@@ -70,8 +69,10 @@ export class ActivityDetailsComponent implements OnInit {
           console.log(data);
           this.genre = data.Genre;
           this.plot = data.Plot;
-          this.imdb = data.Ratings[0].Value;
-          this.rotten = data.Ratings[1].Value;
+          for (let i = 0; i < data.Ratings.length; i++) {
+            this.omdbRatings.push(data.Ratings[i].Value);
+          }
+
           this.imdbId = data.imdbID;
           this.loader.hide();
         },
@@ -137,6 +138,7 @@ export class ActivityDetailsComponent implements OnInit {
   }
 
   goToImdb() {
+    console.log(this.imdbId);
     window.open('http://www.imdb.com/title/' + this.imdbId, '_system', 'location=yes');
   }
 

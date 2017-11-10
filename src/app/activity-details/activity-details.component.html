@@ -10,14 +10,14 @@
     <li>{{genre}}</li>
     <li>{{plot}}</li>
   </ul>
-  <div class="row" *ngIf="imdb != undefined">
+  <div class="row" *ngIf="omdbRatings[0] != undefined">
     <div class="col s5" (click)='goToImdb()'>
       <img src="./assets/images/imdb.png" alt="" class="imdb rating-icon">
-      <span class="omdb-rating imdb">{{imdb}}</span>
+      <span class="omdb-rating imdb">{{omdbRatings[0]}}</span>
     </div>
-    <div class="col s5" *ngIf="rotten != undefined">
+    <div class="col s5" *ngIf="omdbRatings[1] != undefined">
       <img src="./assets/images/rottentomatoes.png" alt="" class="rating-icon">
-      <span class="omdb-rating">{{rotten}}</span>
+      <span class="omdb-rating">{{omdbRatings[1]}}</span>
     </div>
   </div>
   <div class="row">
