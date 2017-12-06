@@ -46,7 +46,7 @@ export class StatusComponent implements OnInit {
           this.loader.hide();
         },
         err => {
-          this.ngOnDestroy();
+          //this.ngOnDestroy(); // comment out for production
           console.error(err + " - computer is likely not powered on.");
           this.isPoweredOn = false;
           this.loader.hide();
@@ -64,8 +64,9 @@ export class StatusComponent implements OnInit {
     let token = this.captcha.getResponse();
     if (token == "" || token == undefined) {
       console.log('captcha token not generated.');
-      toast("Prove you're not a robot. Click the captcha before turning on Plex.", 4000, 'rounded');
-      //this.dialog.show('Are you a robot?', 'Click the captcha before turning on Plex.');
+      toast("Click the captcha before turning on Plex.", 4000, 'rounded');
+    } else if ( this.requestSent ) {
+      toast('Request was already sent. Plex will be on shortly.', 4000, 'rounded');
     } else {
       console.log('power button triggered');
       this.joinAPI.push("plex%20request");
