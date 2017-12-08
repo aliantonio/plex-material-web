@@ -55,7 +55,7 @@ export class RequestsComponent implements OnInit {
   }
 
   getRequests() {
-    return this.http.get('http://asliantonio.com/plex/php/getrequests.php')
+    return this.http.get('https://asliantonio.com/plex/php/getrequests.php')
       .timeout(10000)
       .do(this.logResponse)
       .map(this.extractData)
@@ -180,7 +180,7 @@ export class RequestsComponent implements OnInit {
     let options = new RequestOptions({ headers: headers });
     body.append('id', id);
 
-    return this.http.post("http://asliantonio.com/plex/php/markcomplete.php", body.toString(), options)
+    return this.http.post("https://asliantonio.com/plex/php/markcomplete.php", body.toString(), options)
       .do(this.logResponse)
       .catch(this.catchError);
   }
@@ -193,7 +193,7 @@ export class RequestsComponent implements OnInit {
     body.append('comment', this.oComments.nativeElement.value);
     console.log(this.id, this.oComments.nativeElement.value);
 
-    return this.http.post("http://asliantonio.com/plex/php/submitcomment.php", body.toString(), options)
+    return this.http.post("https://asliantonio.com/plex/php/submitcomment.php", body.toString(), options)
       .do(this.logResponse)
       .catch(this.catchError);
   }
@@ -219,7 +219,7 @@ export class RequestsComponent implements OnInit {
     body.append('name', loggedIn);
     body.append('request', request);
 
-    return this.http.post("http://asliantonio.com/plex/php/submitrequest.php", body.toString(), options)
+    return this.http.post("https://asliantonio.com/plex/php/submitrequest.php", body.toString(), options)
       .do(this.logResponse)
       .catch(this.catchError);
   }
@@ -230,7 +230,7 @@ export class RequestsComponent implements OnInit {
     let options = new RequestOptions({ headers: headers });
     body.append('data', id);
 
-    return this.http.post("http://asliantonio.com/plex/php/deleterequest.php", body.toString(), options)
+    return this.http.post("https://asliantonio.com/plex/php/deleterequest.php", body.toString(), options)
     .do(this.logResponse)
     .catch(this.catchError);
   }

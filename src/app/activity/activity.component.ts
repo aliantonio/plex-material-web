@@ -62,7 +62,7 @@ export class ActivityComponent implements OnInit {
   }
 
   getCurrActivity() {
-    return this.http.get('http://asliantonio.dyndns.org:32400/status/sessions?X-Plex-Token=MbxwPyCXzVwkYQ7ESW87')
+    return this.http.get('https://asliantonio.dyndns.org:32400/status/sessions?X-Plex-Token=MbxwPyCXzVwkYQ7ESW87')
     .timeout(10000)
     .do(this.logResponse)
     .map(this.extractData)
@@ -70,7 +70,7 @@ export class ActivityComponent implements OnInit {
   }
 
   getPreviousActivity() {
-    return this.http.get('http://asliantonio.com/plex/php/dbquery.php')
+    return this.http.get('https://asliantonio.com/plex/php/dbquery.php')
       .timeout(10000)
       .do(this.logResponse)
       .map(this.extractData)

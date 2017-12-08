@@ -11,7 +11,7 @@ export class PingServerService {
   constructor(private http: Http) { }
 
   ping() {
-    return this.http.get('http://asliantonio.com/dashboards/pingserver.php')
+    return this.http.get('https://asliantonio.com/dashboard/pingserver.php')
       .timeout(10000)
       .do(this.logResponse)
       .map(this.extractData)
