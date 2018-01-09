@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
-import { Http, Jsonp, Response } from '@angular/http';
+import { Http, Jsonp, Response, Headers, URLSearchParams, RequestOptions } from '@angular/http';
 import { Observable } from "rxjs";
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
@@ -19,8 +19,16 @@ export class ActivityComponent implements OnInit {
 
   currentResults: string[];
   previousResults: string[];
-  lazy: number;
+  //lazy: number;
+  // add below attributes in html a link to implement lazy loading feature
+  //slice:0:lazy;
+  //infiniteScroll
+  //[infiniteScrollDistance]="1" 
+  //[infiniteScrollThrottle]="300" 
+  //(scrolled)="onScroll()"
   Materialize: any;
+  limit: any = 50;
+  offset: any = 0;
 
   constructor(private http: Http, private jsonp: Jsonp, private loader: LoaderService, private router: Router, private dataStore: DataStoreService) { }
 
@@ -28,6 +36,48 @@ export class ActivityComponent implements OnInit {
     this.loader.show();
     this.subscribePrevActivity();
     this.subscribeCurrActivity();
+  }
+
+  getCurrActivity() {
+    return this.http.get('https://asliantonio.dyndns.org:32400/status/sessions?X-Plex-Token=MbxwPyCXzVwkYQ7ESW87')
+    .timeout(10000)
+    .do(this.logResponse)
+    .map(this.extractData)
+    .catch(this.catchError);
+  }
+
+  getMoreResults() {
+    this.offset = this.offset + this.limit;
+    let body = new URLSearchParams();
+    let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    let options = new RequestOptions({ headers: headers });
+    body.set('limit', this.limit);
+    body.set('offset', this.offset);
+
+    return this.http.get('https://asliantonio.com/plex/php/dbquery.php', {params: body.toString()})
+      .timeout(10000)
+      .do(this.logResponse)
+      .map(this.extractData)
+      .catch(this.catchError);
+      
+  }
+
+  getPreviousActivity() {
+    let body = new URLSearchParams();
+    let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    let options = new RequestOptions({ headers: headers });
+    body.set('limit', this.limit);
+    body.set('offset', this.offset);
+    
+    return this.http.get('https://asliantonio.com/plex/php/dbquery.php', {params: body.toString()})
+      .timeout(10000)
+      .do(this.logResponse)
+      .map(this.extractData)
+      .catch(this.catchError);
+  }
+
+  loadMore() {
+    this.subscribeLoadMore();
   }
 
   subscribeCurrActivity() {
@@ -44,12 +94,32 @@ export class ActivityComponent implements OnInit {
     )
   }
 
+  subscribeLoadMore() {
+    this.loader.show();
+    this.getMoreResults()
+      .subscribe(
+        data => {
+          console.log(data);
+          data.forEach((obj) => {
+            this.previousResults.push(obj);
+          });
+
+          this.loader.hide();
+        },
+        err => {
+          console.error(err);
+          this.loader.hide();
+          toast('Something went wrong. Please check your internet connection.', 7000, 'rounded');
+        }
+    )
+  }
+
   subscribePrevActivity() {
     this.getPreviousActivity()
       .subscribe(
         data => {
           console.log(data);
-          this.lazy = 100;
+          //this.lazy = 100;
           this.previousResults = data;
           this.loader.hide();
         },
@@ -61,25 +131,9 @@ export class ActivityComponent implements OnInit {
     )
   }
 
-  getCurrActivity() {
-    return this.http.get('https://asliantonio.dyndns.org:32400/status/sessions?X-Plex-Token=MbxwPyCXzVwkYQ7ESW87')
-    .timeout(10000)
-    .do(this.logResponse)
-    .map(this.extractData)
-    .catch(this.catchError);
-  }
-
-  getPreviousActivity() {
-    return this.http.get('https://asliantonio.com/plex/php/dbquery.php')
-      .timeout(10000)
-      .do(this.logResponse)
-      .map(this.extractData)
-      .catch(this.catchError);
-  }
-
-  onScroll() {
-    this.lazy += 10;
-  }
+//  onScroll() {
+//    this.lazy += 10;
+//  }
 
   navigateTo(type, user, title, showTitle, season, episode) {
     this.dataStore.setType(type);

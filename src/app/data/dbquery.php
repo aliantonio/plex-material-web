@@ -8,6 +8,9 @@ $password = "Rocketshawks23";
 $dbname = "DBaliantonio23";
 $outp = array();
 
+$limit = ($_GET['limit']);
+$offset = ($_GET['offset']);
+
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
@@ -15,7 +18,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-$sql = "SELECT * FROM PLEX_ACTVTY ORDER BY TIMESTAMP DESC";
+$sql = "SELECT * FROM PLEX_ACTVTY ORDER BY TIMESTAMP DESC LIMIT " . $limit . " OFFSET " . $offset . " ";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

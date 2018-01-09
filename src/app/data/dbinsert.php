@@ -20,12 +20,17 @@
     } 
     
     //$sql = "REPLACE INTO PLEX_ACTVTY (USER_ID, MEDIA_CONTENT) VALUES ('".$_POST['name']."','".$_POST['media']."')" ;
-
-    $sql = "INSERT INTO `PLEX_ACTVTY` (USER_ID, MEDIA_CONTENT) SELECT '".$_POST['name']."', '".$_POST['media']."' FROM `PLEX_ACTVTY` WHERE NOT EXISTS (SELECT * FROM `PLEX_ACTVTY` WHERE USER_ID='".$_POST['name']."' AND MEDIA_CONTENT='".$_POST['media']."') LIMIT 1";
+    $media = $_POST['media'];
+    $media = str_replace("'", "", $media);
+    $show = $_POST['show'];
+    $show = str_replace("'", "", $show);
+    $show = str_replace("%SHOWTITLE", "", $show);
+    $season = $_POST['season'];
+    $season = str_replace("'", "", $season);
+    $season = str_replace("%SEASON", "", $season);
+    
+    $sql = "INSERT INTO `PLEX_ACTVTY` (USER_ID, MEDIA_CONTENT, SHOW_TITLE, SEASON, EPISODE_NUM, TYPE) SELECT '".$_POST['name']."', '".$media."', '".$show."', '".$season."', '".$_POST['episode']."', '".$_POST['type']."' FROM `PLEX_ACTVTY` WHERE NOT EXISTS (SELECT * FROM `PLEX_ACTVTY` WHERE USER_ID='".$_POST['name']."' AND MEDIA_CONTENT='".$media."' AND SHOW_TITLE='".$show."' AND SEASON='".$season."' AND EPISODE_NUM='".$_POST['episode']."' AND TYPE='".$_POST['type']."') LIMIT 1";
     echo($sql);
-
-
-
     
 //    echo($sql)
     // $i = 0;
