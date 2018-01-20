@@ -2,7 +2,9 @@
 
 <div class="status-wrap">
     <h5>
-        PLEX SERVER IS {{ isPoweredOn ? 'ON' : 'OFF' }} <i class="material-icons">{{ isPoweredOn ? 'check_circle' : 'error'}}</i>
+        {{maintenanceMessage}}<br>
+        {{maintUpdate}}
+        <!--PLEX SERVER IS {{ isPoweredOn ? 'ON' : 'OFF' }} <i class="material-icons">{{ isPoweredOn ? 'check_circle' : 'error'}}</i>-->
     </h5>
     <p *ngIf="isPoweredOn">
         Refresh your page/app.<br>
@@ -11,10 +13,10 @@
     <button class="waves-effect waves-light btn" id="report" (click)="report(recaptcha)" *ngIf="isPoweredOn">
         Report <i class="material-icons">{{ isPoweredOn ? 'report_problem' : 'power_settings_new' }}</i>
     </button>
-    <button class="waves-effect waves-light btn" id="power-on" (click)="powerOn(recaptcha)" *ngIf="!isPoweredOn">
+    <button disabled class="waves-effect waves-light btn" id="power-on" (click)="powerOn(recaptcha)" *ngIf="!isPoweredOn">
         Turn on Plex <i class="material-icons">{{ isPoweredOn ? 'report_problem' : 'power_settings_new' }}</i>
     </button>
-    <div class="recaptcha-wrap">
+    <!--<div class="recaptcha-wrap">
         <re-captcha site_key="'6LenhxoTAAAAAARx6c_SC9QmvNKykwE46s3Ar67W'"></re-captcha>
-    </div>
+    </div>-->
 </div>
