@@ -21,22 +21,18 @@ export class StatusComponent implements OnInit {
   private requestSent: boolean;
   private reportSent: boolean;
   @ViewChild(ReCaptchaComponent) captcha: ReCaptchaComponent;
-  maintenanceMessage: string;
-  maintUpdate: string;
 
   constructor(private http: Http, private pingServer: PingServerService,
     private joinAPI: JoinAPIService, private jsonp: Jsonp, private loader: LoaderService) {
     this.alive = true;
     this.requestSent = false;
     this.reportSent = false;
-    this.maintenanceMessage = "Plex will be down up to 1-2 days. Anthony's router decided to take a shit. - 1/16";
-    this.maintUpdate = "Doesn't seem to be the router after all. Comcast tech coming Sunday AM 1/21."
   }
 
   ngOnInit() {
-//    this.alive = true;
-//    this.loader.show();
-//    this.checkStatus();
+    this.alive = true
+    this.loader.show();
+    this.checkStatus();
   }
 
   checkStatus() {
