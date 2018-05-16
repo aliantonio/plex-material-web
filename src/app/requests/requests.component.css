@@ -28,6 +28,10 @@ a {
     cursor: pointer;
 }
 
+.collection-item:hover {
+    background-color: rgb(51, 50, 50) !important;
+}
+
 .collection-item .btn {
     background-color: inherit !important;
 }
