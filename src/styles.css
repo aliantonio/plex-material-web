@@ -9,8 +9,14 @@ h1, h2, h3, h4, h5, p, input[type=text], input[type=password] {
     color: #fff;
 }
 
+@font-face {
+    font-family: "GoogleSans";
+    src: url("assets/fonts/GoogleSans-Regular.ttf");
+  }
+
 html {
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    /*font-family: Roboto, "Helvetica Neue", sans-serif;*/
+    font-family: "GoogleSans", Roboto, sans-serif !important;
 }
 
 .mat-toolbar.mat-primary {
