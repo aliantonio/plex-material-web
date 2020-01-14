@@ -32,6 +32,9 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { Md5 } from 'ts-md5/dist/md5';
 import { StarRatingModule } from 'angular-star-rating';
 import { DateFormatPipe } from './date-format.pipe';
+import { EmailNotifComponent } from './email-notif/email-notif.component';
+import { componentFactoryName } from '@angular/compiler';
+import { RegisterComponent } from './register/register.component';
 
 const appRoutes: Routes = [
   {
@@ -62,6 +65,14 @@ const appRoutes: Routes = [
     }
   },
   {
+    path: 'register',
+    component: RegisterComponent
+  },
+  {
+    path: 'email-notif',
+    component: EmailNotifComponent
+  },
+  {
     path: '',
     redirectTo: 'status',
     pathMatch: 'full'
@@ -78,7 +89,9 @@ const appRoutes: Routes = [
     RequestsComponent,
     LoginComponent,
     AccountComponent,
-    DateFormatPipe
+    DateFormatPipe,
+    EmailNotifComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

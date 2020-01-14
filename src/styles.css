@@ -83,7 +83,7 @@ input[type=text]:focus, input[type=password]:focus {
 /*RESPONSIVE CODE*/
 @media screen and (max-width: 550px) {
 
-    #list-activity, .activity-dtl-wrap, .requests-wrapper, .modal, .account-wrap, .acct-details-wrap {
+    #list-activity, .activity-dtl-wrap, .requests-wrapper, .modal, .account-wrap, .acct-details-wrap, .email-notif-wrap, .register-wrap {
         width: 100% !important;
     }
     

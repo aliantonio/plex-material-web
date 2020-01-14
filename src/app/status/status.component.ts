@@ -8,6 +8,7 @@ import { ReCaptchaComponent } from 'angular2-recaptcha';
 import { JoinAPIService } from '../join-api.service';
 import { LoaderService } from '../loader.service';
 import { toast } from 'angular2-materialize';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-status',
@@ -23,7 +24,7 @@ export class StatusComponent implements OnInit {
   @ViewChild(ReCaptchaComponent) captcha: ReCaptchaComponent;
 
   constructor(private http: Http, private pingServer: PingServerService,
-    private joinAPI: JoinAPIService, private jsonp: Jsonp, private loader: LoaderService) {
+    private joinAPI: JoinAPIService, private jsonp: Jsonp, private loader: LoaderService, private router: Router) {
     this.alive = true;
     this.requestSent = false;
     this.reportSent = false;
@@ -85,6 +86,11 @@ export class StatusComponent implements OnInit {
       this.joinAPI.push("check%20plex");
       this.reportSent = true;
     }
+  }
+
+  emailNotif() {
+    console.log("email link triggered");
+    this.router.navigateByUrl("/email-notif");
   }
 
 }

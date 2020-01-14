@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, EventEmitter } from '@angular/core';
 import { Md5 } from 'ts-md5/dist/md5';
-import { LoginService } from "../login.service";
 import { MaterializeAction } from 'angular2-materialize';
 import { Http, Jsonp, Response, RequestOptions, Headers  } from '@angular/http';
 import { HttpParams } from '@angular/common/http';
@@ -11,87 +10,92 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import { Router } from '@angular/router';
 import { LoaderService } from '../loader.service';
-import { DataStoreService } from '../data-store.service';
+import { toast } from 'angular2-materialize';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-export class LoginComponent implements OnInit {
+export class RegisterComponent implements OnInit {
 
   @ViewChild('username') username;
+  @ViewChild('confirmusername') confirmusername;
   @ViewChild('password') password;
   modalMsg: string;
   modalTitle: string;
   modalActions = new EventEmitter<string|MaterializeAction>();
-  
-  constructor(private md5: Md5, private loginService: LoginService, private http: Http,
-      private router: Router, private loader: LoaderService, private dataStore: DataStoreService) { }
+
+  constructor(private md5: Md5, private http: Http, private router: Router, private loader: LoaderService) { }
 
   ngOnInit() {
   }
 
-  login() {
+  register() {
     let user = this.username.nativeElement.value;
+    let confirmuser = this.confirmusername.nativeElement.value;
     let pass = this.password.nativeElement.value;
 
-    if (user == '' || pass == '' || user == undefined || pass == undefined) {
+    if (user == '' || confirmuser == '' || pass == '' || user == undefined || confirmuser == undefined || pass == undefined) {
       console.log('username or password is blank');
-      this.openModal('Error', 'The username and password fields cannot be empty.');
+      this.openModal('Error', 'The username and/or password fields cannot be empty.');
+      return;
+    } else if (user !== confirmuser) {
+      console.log('email or confirm email input is left blank');
+      this.openModal('Error', 'Your email addresses do not match.');
       return;
     } else {
-
       this.loader.show();
       let encryptPass = Md5.hashStr(pass || '');
-      //console.log("unencryped : " + pass + ", encrypted : " + encryptPass);
+      console.log("unencryped : " + pass + ", encrypted : " + encryptPass);
 
       let urlSearchParams = new URLSearchParams();
       urlSearchParams.set('name', user);
-      urlSearchParams.set('password', encryptPass.toString());
+      urlSearchParams.set('userpassword', encryptPass.toString());
       let body = urlSearchParams.toString();   
 
       let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'}); 
       let options = new RequestOptions({ headers: headers });
 
-      this.callLogin(body, options)
+      this.callRegister(body, options)
       .subscribe(
         data => {
-          console.log(data);
-          if (data == null) {
-            console.error('invalid credentials');
-            this.openModal('Oops!', 'Your username and/or password do not match. Please try again.')
+          console.log(data._body);
+          let response = data._body;
+          if (response.substring(0,21) == "Error: Duplicate entry") {
+            this.openModal('Error', 'You are already registered.');
+            this.loader.hide();
+            return;
+          } else if (response == null || response.substring(0, 5) == "Error") {
+            console.error(response);
+            this.openModal('Oops!', 'Something went wrong. Try again later or ask Anthony to look into it. \n\n\nGive him this error: ' + response);
+            this.loader.hide();
+            return;
           } else {
-            console.log('successfully logged in');
+            console.log('new user registered and successfully logged in');
             console.log('localStorage auth', user);
             localStorage.setItem('userid', user);
-            console.log(this.dataStore.getRedirectUrl());
-            if (this.dataStore.getRedirectUrl() == undefined) {
-              this.router.navigateByUrl('/account');
-            } else {
-              this.router.navigateByUrl(this.dataStore.getRedirectUrl());
-            }
-            
+            toast("Success. You are now registered.", 4000, 'rounded');
+            this.router.navigateByUrl('/account');
           }
           this.loader.hide();
         },
         err => {
           console.error(err);
           this.loader.hide();
+          this.openModal('Oops!', 'Something went wrong. Try again later or ask Anthony to look into it.');
         }
       );
+
     }
+
   }
 
-  linkToRegister() {
-    this.router.navigateByUrl('/register');
-  }
-
-  private callLogin(body, options) {
-    return this.http.post('https://asliantonio.com/plex/php/login.php', body, options)
-      .timeout(10000)
+  private callRegister(body, options) {
+    return this.http.post('https://asliantonio.com/plex/php/register.php', body.toString(), options)
+//      .timeout(10000)
       .do(this.logResponse)
-      .map(this.extractData)
+  //    .map(this.extractData)
       .catch(this.catchError);
   }
 

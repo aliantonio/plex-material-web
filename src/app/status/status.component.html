@@ -1,6 +1,7 @@
 <div class="logo-wrap"></div>
 
 <div class="status-wrap">
+
     <h5>
         PLEX SERVER IS {{ isPoweredOn ? 'ON' : 'OFF' }} <i class="material-icons">{{ isPoweredOn ? 'check_circle' : 'error'}}</i>
     </h5>
@@ -17,4 +18,7 @@
     <div class="recaptcha-wrap">
         <re-captcha site_key="6Lcy0mMUAAAAALpIGznc8sdS-ZtaF-Jw2OF-TjcV"></re-captcha>
     </div>
+    <p>
+        <span style="color:lightcoral;">NEW: </span><a class="email-signup" (click)="emailNotif()">Receive emails for new content</a>
+    </p>
 </div>

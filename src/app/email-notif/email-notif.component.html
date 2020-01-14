@@ -1,0 +1,52 @@
+<div class="email-notif-wrap">
+  <div class="row">
+    <form class="col s12" action="#">
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="email" type="text" class="validate" #email>
+          <label for="email">Email</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="confirm-email" type="text" class="validate" #confirmemail>
+          <label for="confirm-email">Confirm Email</label>
+        </div>
+      </div>
+      <div class="row">
+        <p>
+          <input id="movie-checkbox" type="checkbox" class="validate" [disabled]="disabled" #moviecheckbox>
+          <label for="movie-checkbox">Movies</label>
+        </p>
+        <p>
+          <input id="tv-checkbox" type="checkbox" class="validate" [disabled]="disabled" #tvcheckbox>
+          <label for="tv-checkbox">TV Shows</label>
+        </p>
+        <p>
+          <input id="unsubscribe" type="checkbox" class="validate" (click)="toggleUnsub()" #unsubscribe>
+          <label for="unsubscribe">Unsubscribe from email notifications</label>
+        </p>
+      </div>
+      <div class="row">
+        <button class="btn waves-effect waves-light" id="submit-email-request" (click)="submitRequest();$event.preventDefault();">Submit</button>
+      </div>
+    </form>
+  </div>
+  <div class="row">
+    <p style="padding-left: 10px; padding-right: 10px;">
+      **If you have signed up and are not getting emails, let me know please so I can fix.
+    </p>
+  </div>
+</div>
+
+<!-- Modal Window -->
+<div id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalActions">
+  <div class="modal-content">
+    <h5> {{ modalTitle }}</h5>
+    <p> {{modalMsg}} </p>
+  </div>
+  <div class="modal-footer">
+    <a class="waves-effect waves-green btn-flat" (click)="closeModal()">Close</a>
+  </div>
+</div>
+

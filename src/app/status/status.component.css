@@ -22,3 +22,9 @@ i {
     text-align: -webkit-center;
     padding-top: 15px;
 }
+
+.email-signup {
+    color: #fff;
+    text-decoration: underline;
+    cursor: pointer;
+}
