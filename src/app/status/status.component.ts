@@ -42,8 +42,14 @@ export class StatusComponent implements OnInit {
     .subscribe(() => {
       this.pingServer.ping()
         .subscribe((data) => {
+          //this.ngOnDestroy(); // comment out for production
           console.log(data);
-          this.isPoweredOn = true;
+          if (data.status == "success") {
+            this.isPoweredOn = true;
+          } else {
+            console.error("Successful call but couldn't connect to port. Computer is likely turned off.");
+            this.isPoweredOn = false;
+          }
           this.loader.hide();
         },
         err => {

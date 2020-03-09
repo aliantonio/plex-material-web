@@ -6,8 +6,8 @@
         PLEX SERVER IS {{ isPoweredOn ? 'ON' : 'OFF' }} <i class="material-icons">{{ isPoweredOn ? 'check_circle' : 'error'}}</i>
     </h5>
     <p *ngIf="isPoweredOn">
-        Refresh your page/app.<br>
-        If you cannot see the library, click here.
+        You may need to refresh your page/app.<br>
+        If you cannot see the library or having issues, click here.
     </p>
     <button class="waves-effect waves-light btn" id="report" (click)="report(recaptcha)" *ngIf="isPoweredOn">
         Report <i class="material-icons">{{ isPoweredOn ? 'report_problem' : 'power_settings_new' }}</i>
