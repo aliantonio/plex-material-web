@@ -1,6 +1,6 @@
 <div class="logo-wrap"></div>
 
-<div class="status-wrap">
+<div *ngIf="!isUnderMaintenance" class="status-wrap">
 
     <h5>
         PLEX SERVER IS {{ isPoweredOn ? 'ON' : 'OFF' }} <i class="material-icons">{{ isPoweredOn ? 'check_circle' : 'error'}}</i>
@@ -24,4 +24,20 @@
     <p>
         <span style="color:lightcoral;">NEW: </span><a class="faq" (click)="faq()">FAQ and Troubleshooting Steps</a>
     </p>
+</div>
+
+<div *ngIf="isUnderMaintenance" class="status-wrap">
+    <h5>
+        PLEX SERVER IS <span style="color: rgb(255, 157, 51)">UNDER MAINTENANCE BY ANTHONY <i class="material-icons">build</i></span>
+    </h5>
+    <p>
+        Check back in a little while or contact me directly if this persists for a long time.
+    </p>
+    <button class="waves-effect waves-light btn" id="report" (click)="report(recaptcha)" *ngIf="isPoweredOn">
+        Report <i class="material-icons">{{ isPoweredOn ? 'report_problem' : 'power_settings_new' }}</i>
+    </button>
+    <div class="recaptcha-wrap">
+        <re-captcha site_key="6Lcy0mMUAAAAALpIGznc8sdS-ZtaF-Jw2OF-TjcV"></re-captcha>
+    </div>
+
 </div>

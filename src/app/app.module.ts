@@ -25,6 +25,7 @@ import { JoinAPIService } from './join-api.service';
 import { LoginService } from './login.service';
 import { LoaderService } from './loader.service';
 import { DataStoreService } from './data-store.service';
+import { CheckMaintStatusService } from './check-maint-status.service';
 
 // node modules
 import { MaterializeModule } from 'angular2-materialize';
@@ -112,7 +113,7 @@ const appRoutes: Routes = [
     StarRatingModule.forRoot()
   ],
   exports: [MaterializeModule],
-  providers: [PingServerService, JoinAPIService, Md5, LoginService, AccountComponent, LoaderService, DataStoreService],
+  providers: [PingServerService, JoinAPIService, Md5, LoginService, AccountComponent, LoaderService, DataStoreService, CheckMaintStatusService],
   entryComponents: [],
   bootstrap: [AppComponent]
 })

@@ -7,6 +7,7 @@ import { PingServerService } from "../ping-server.service";
 import { ReCaptchaComponent } from 'angular2-recaptcha';
 import { JoinAPIService } from '../join-api.service';
 import { LoaderService } from '../loader.service';
+import { CheckMaintStatusService } from "../check-maint-status.service";
 import { toast } from 'angular2-materialize';
 import { Router } from '@angular/router';
 
@@ -22,18 +23,38 @@ export class StatusComponent implements OnInit {
   private requestSent: boolean;
   private reportSent: boolean;
   @ViewChild(ReCaptchaComponent) captcha: ReCaptchaComponent;
+  private isUnderMaintenance: boolean;
 
-  constructor(private http: Http, private pingServer: PingServerService,
+  constructor(private http: Http, private pingServer: PingServerService, private maintStatus: CheckMaintStatusService, 
     private joinAPI: JoinAPIService, private jsonp: Jsonp, private loader: LoaderService, private router: Router) {
     this.alive = true;
     this.requestSent = false;
     this.reportSent = false;
+    this.isUnderMaintenance = false;
   }
 
   ngOnInit() {
     this.alive = true
     this.loader.show();
     this.checkStatus();
+    this.checkMaintStatus();
+  }
+
+  checkMaintStatus() {
+    Observable.timer(0, 10000) // 5 seconds
+    .takeWhile(() => this.alive)
+    .subscribe(() => {
+      this.maintStatus.maintStatus()
+        .subscribe((data) => {
+          this.ngOnDestroy(); // comment out for production
+          console.log(data);
+          data[0].STAT_DESC == 'ACTIVE' ? this.isUnderMaintenance = false : this.isUnderMaintenance = true;
+        },
+        err => {
+          this.ngOnDestroy(); // comment out for production
+          console.error(err);
+      });
+    });
   }
 
   checkStatus() {
