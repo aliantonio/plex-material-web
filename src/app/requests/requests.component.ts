@@ -66,7 +66,7 @@ export class RequestsComponent implements OnInit {
     let loggedIn = localStorage.getItem('userid');
     let request = this.oRequest.nativeElement.value;
     if ( loggedIn == null || loggedIn == undefined ) {
-      this.openModal('Error', 'Please login before submitting your review.', false, false);
+      this.openModal('Error', 'Please login before submitting your request.', false, false);
     } else if (request.length <= 0) {
       this.openModal('Error', 'Please enter a request before submitting.', true, false);
     } else {
@@ -207,7 +207,7 @@ export class RequestsComponent implements OnInit {
   }
 
   closeModal() {
-    this.modalActions.emit({ action: "modal", params: ["close"] });
+    this.modalActions.emit({ action: "modfal", params: ["close"] });
   }
 
   private dbSubmit() {

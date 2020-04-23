@@ -35,6 +35,7 @@ import { DateFormatPipe } from './date-format.pipe';
 import { EmailNotifComponent } from './email-notif/email-notif.component';
 import { componentFactoryName } from '@angular/compiler';
 import { RegisterComponent } from './register/register.component';
+import { FaqComponent } from './faq/faq.component';
 
 const appRoutes: Routes = [
   {
@@ -48,6 +49,10 @@ const appRoutes: Routes = [
   {
     path: 'activity/:name/:dtls',
     component: ActivityDetailsComponent
+  },
+  {
+    path: 'faq',
+    component: FaqComponent
   },
   {
     path: 'requests',
@@ -91,7 +96,8 @@ const appRoutes: Routes = [
     AccountComponent,
     DateFormatPipe,
     EmailNotifComponent,
-    RegisterComponent
+    RegisterComponent,
+    FaqComponent
   ],
   imports: [
     BrowserModule,

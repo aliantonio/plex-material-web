@@ -23,8 +23,12 @@ i {
     padding-top: 15px;
 }
 
-.email-signup {
+.email-signup, .faq {
     color: #fff;
     text-decoration: underline;
     cursor: pointer;
+}
+
+.faq {
+    padding-bottom: 15px;
 }

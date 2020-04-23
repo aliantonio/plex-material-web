@@ -42,7 +42,7 @@ export class StatusComponent implements OnInit {
     .subscribe(() => {
       this.pingServer.ping()
         .subscribe((data) => {
-          //this.ngOnDestroy(); // comment out for production
+          this.ngOnDestroy(); // comment out for production
           console.log(data);
           if (data.status == "success") {
             this.isPoweredOn = true;
@@ -53,7 +53,7 @@ export class StatusComponent implements OnInit {
           this.loader.hide();
         },
         err => {
-          //this.ngOnDestroy(); // comment out for production
+          this.ngOnDestroy(); // comment out for production
           console.error(err + " - computer is likely not powered on.");
           this.isPoweredOn = false;
           this.loader.hide();
@@ -97,6 +97,11 @@ export class StatusComponent implements OnInit {
   emailNotif() {
     console.log("email link triggered");
     this.router.navigateByUrl("/email-notif");
+  }
+
+  faq() {
+    console.log("faq link triggered");
+    this.router.navigateByUrl("/faq");
   }
 
 }
