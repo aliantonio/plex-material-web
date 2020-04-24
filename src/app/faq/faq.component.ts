@@ -13,6 +13,8 @@ export class FaqComponent implements OnInit {
   ngOnInit() {
   }
 
+  goToHome() { this.router.navigateByUrl('/'); }
+
   goToLogin() { this.router.navigateByUrl('/login'); }
 
   goToRequests() { this.router.navigateByUrl('/requests'); }

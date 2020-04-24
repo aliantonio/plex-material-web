@@ -46,12 +46,12 @@ export class StatusComponent implements OnInit {
     .subscribe(() => {
       this.maintStatus.maintStatus()
         .subscribe((data) => {
-          this.ngOnDestroy(); // comment out for production
+          //this.ngOnDestroy(); // comment out for production
           console.log(data);
           data[0].STAT_DESC == 'ACTIVE' ? this.isUnderMaintenance = false : this.isUnderMaintenance = true;
         },
         err => {
-          this.ngOnDestroy(); // comment out for production
+          //this.ngOnDestroy(); // comment out for production
           console.error(err);
       });
     });
@@ -63,7 +63,7 @@ export class StatusComponent implements OnInit {
     .subscribe(() => {
       this.pingServer.ping()
         .subscribe((data) => {
-          this.ngOnDestroy(); // comment out for production
+          //this.ngOnDestroy(); // comment out for production
           console.log(data);
           if (data.status == "success") {
             this.isPoweredOn = true;
@@ -74,7 +74,7 @@ export class StatusComponent implements OnInit {
           this.loader.hide();
         },
         err => {
-          this.ngOnDestroy(); // comment out for production
+          //this.ngOnDestroy(); // comment out for production
           console.error(err + " - computer is likely not powered on.");
           this.isPoweredOn = false;
           this.loader.hide();

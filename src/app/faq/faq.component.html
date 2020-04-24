@@ -4,22 +4,48 @@
     <ul materialize="collapsible" class="collapsible" data-collapsible="accordion">
       <li>
         <div class="collapsible-header"><i class="material-icons">closed_caption</i>How do I turn on subtitles?</div>
-        <div class="collapsible-body"><p>Great question. From the video player, click on the settings button. It should look like a gear icon. Then, click on subtitles and click on "English SRT". Voila!</p></div>
+        <div class="collapsible-body">
+          <h5>Web Player</h5>
+          <p>
+            In the bottom-right hand of the player, about the 4th icon from the left is the settings button. Click that, then click on Subtitles. If there are subtitles available,
+            it will say English (SRT). Click on that. If no subtitles are vailable, click on Search. This will attempt to search for subtitles on the web. Find the best one that syncs
+            up with the video you are watching.
+          </p>
+          <h5>Android/iOS</h5>
+          <p>
+            On the bottom-right hand of the screen, click on the menu button (probably the icon with the 3 dots). A card will pop up. Click on Playback Settings. Then click
+            on Subtitles. If there are subtitles available, it will say English (SRT). Click on that. If no subtitles are vailable, click on More. This will attempt 
+            to search for subtitles on the web. Find the best one that syncs up with the video you are watching.
+          </p>
+        </div>
       </li>
       <li>
         <div class="collapsible-header"><i class="material-icons">theaters</i>How do I fix poor image quality or buffering?</div>
-        <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+        <div class="collapsible-body">
+          <h5>Web Player</h5>
+            <p>
+              In the bottom-right hand of the player, about the 4th icon from the left is the settings button. Click that, then click on Quality. 
+              Ensure that "Convert automatically" is checked. This will usually provide the best setting based on your connection speed. 
+              If you're still having issues, click on "Show All", and then click a lower quality setting.
+            </p>
+          <h5>Android/iOS</h5>
+          <p>
+            On the bottom-right hand of the screen, click on the menu button (probably the icon with the 3 dots). A card will pop up. Click on Playback Settings. Then click
+            on Quality. Ensure that "Convert automatically" is checked. This will usually provide the best setting based on your connection speed. 
+            If you're still having issues, click on "Show All", and then click a lower quality setting.
+          </p>
+        </div>
       </li>
       <li>
         <div class="collapsible-header"><i class="material-icons">add_circle</i>How do I request new movies or shows?</div>
-        <div class="collapsible-body"><p>You can either log in <span style="text-decoration: underline; cursor: pointer" (click)="goToLogin();">here</span> 
-          and submit a request from the <span style="text-decoration: underline; cursor: pointer" (click)="goToRequests();">"Requests"</span> page or just contact me directly.</p></div>
+        <div class="collapsible-body"><p>You can either log in <span class="underline" (click)="goToLogin();">here</span> 
+          and submit a request from the <span class="underline" (click)="goToRequests();">"Requests"</span> page or just contact me directly.</p></div>
       </li>
       <li>
         <div class="collapsible-header"><i class="material-icons">help</i>Anything else I should know?</div>
-        <div class="collapsible-body"><p>My computer is set to automatically shut off at 1am every day, if it's not already turned off. 
+        <div class="collapsible-body"><p>My computer is set to automatically shut off at approximately 1am every day, if it's not already turned off. 
           It will check if anyone is watching anything first. If something is being played, it will wait until nothing at all is being played anymore.
-          If you want to keep watching, just turn the computer back on as you normally would from the home/status page.
+          If you want to keep watching, just turn the computer back on as you normally would from the <span class="underline" (click)="goToHome();">home/status</span> page.
         </p></div>
       </li>
     </ul>
