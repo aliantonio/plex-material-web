@@ -23,7 +23,7 @@ export class StatusComponent implements OnInit {
   private requestSent: boolean;
   private reportSent: boolean;
   @ViewChild(ReCaptchaComponent) captcha: ReCaptchaComponent;
-  private isUnderMaintenance: boolean;
+  isUnderMaintenance: boolean;
 
   constructor(private http: Http, private pingServer: PingServerService, private maintStatus: CheckMaintStatusService, 
     private joinAPI: JoinAPIService, private jsonp: Jsonp, private loader: LoaderService, private router: Router) {
