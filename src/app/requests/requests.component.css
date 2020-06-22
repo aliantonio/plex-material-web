@@ -40,6 +40,8 @@ a {
     color: #FFF;
 }
 
+.collection { overflow: visible;}
+
 .delete { color: red !important; }
 
 .modal-comments { color: #000 !important; }
