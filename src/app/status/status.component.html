@@ -28,7 +28,7 @@
 
 <div *ngIf="isUnderMaintenance" class="status-wrap">
     <h5>
-        PLEX SERVER IS <span style="color: rgb(255, 157, 51)">UNDER MAINTENANCE BY ANTHONY <i class="material-icons">build</i></span>
+        PLEX SERVER IS<span style="color: rgb(255, 157, 51)"> {{maintenanceMsg}} <i class="material-icons">error</i></span>
     </h5>
     <p>
         Check back in a little while or contact me directly if this persists for a long time.

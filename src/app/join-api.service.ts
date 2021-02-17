@@ -11,7 +11,7 @@ export class JoinAPIService {
 
   push(param: string, args?: any) {
     let apiUrl = 'https://joinjoaomgcd.appspot.com/_ah/api/messaging/v1/sendPush?text='
-    let deviceId = 'f70f80282ea741f190b8d80d9388f460'; // pixel 3
+    let deviceId = 'f70f80282ea741f190b8d80d9388f460'; // pixel 5
     let apiKey = '36daccd47ff14aa385a36d425ab4bc13';
     
     console.log(apiUrl + param + args + '&deviceId=' + deviceId + '&apikey=' + apiKey);

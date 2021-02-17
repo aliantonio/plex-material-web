@@ -24,6 +24,7 @@ export class StatusComponent implements OnInit {
   private reportSent: boolean;
   @ViewChild(ReCaptchaComponent) captcha: ReCaptchaComponent;
   isUnderMaintenance: boolean;
+  maintenanceMsg: string;
 
   constructor(private http: Http, private pingServer: PingServerService, private maintStatus: CheckMaintStatusService, 
     private joinAPI: JoinAPIService, private jsonp: Jsonp, private loader: LoaderService, private router: Router) {
@@ -48,7 +49,12 @@ export class StatusComponent implements OnInit {
         .subscribe((data) => {
           //this.ngOnDestroy(); // comment out for production
           console.log(data);
-          data[0].STAT_DESC == 'ACTIVE' ? this.isUnderMaintenance = false : this.isUnderMaintenance = true;
+          if( data[0].STAT_ID == 0 ) {
+            this.isUnderMaintenance = false;
+          } else {
+            this.isUnderMaintenance = true;
+            this.maintenanceMsg = data[0].STAT_DESC;
+          }
         },
         err => {
           //this.ngOnDestroy(); // comment out for production
